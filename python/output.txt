@@ -1,0 +1,155 @@
+Archive:  /mnt/c/wamp64/www/phen/python/static/2019029.zip
+  End-of-central-directory signature not found.  Either this file is not
+  a zipfile, or it constitutes one disk of a multi-part archive.  In the
+  latter case the central directory and zipfile comment will be found on
+  the last disk(s) of this archive.
+note:  /mnt/c/wamp64/www/phen/python/static/2019029.zip may be a plain executable, not an archive
+unzip:  cannot find zipfile directory in one of /mnt/c/wamp64/www/phen/python/static/2019029.zip or
+        /mnt/c/wamp64/www/phen/python/static/2019029.zip.zip, and cannot find /mnt/c/wamp64/www/phen/python/static/2019029.zip.ZIP, period.
+Archive:  /mnt/c/wamp64/www/phen/python/static/2019029.zip
+  End-of-central-directory signature not found.  Either this file is not
+  a zipfile, or it constitutes one disk of a multi-part archive.  In the
+  latter case the central directory and zipfile comment will be found on
+  the last disk(s) of this archive.
+note:  /mnt/c/wamp64/www/phen/python/static/2019029.zip may be a plain executable, not an archive
+unzip:  cannot find zipfile directory in one of /mnt/c/wamp64/www/phen/python/static/2019029.zip or
+        /mnt/c/wamp64/www/phen/python/static/2019029.zip.zip, and cannot find /mnt/c/wamp64/www/phen/python/static/2019029.zip.ZIP, period.
+Archive:  /mnt/c/wamp64/www/phen/python/static/2019029.zip
+  End-of-central-directory signature not found.  Either this file is not
+  a zipfile, or it constitutes one disk of a multi-part archive.  In the
+  latter case the central directory and zipfile comment will be found on
+  the last disk(s) of this archive.
+note:  /mnt/c/wamp64/www/phen/python/static/2019029.zip may be a plain executable, not an archive
+unzip:  cannot find zipfile directory in one of /mnt/c/wamp64/www/phen/python/static/2019029.zip or
+        /mnt/c/wamp64/www/phen/python/static/2019029.zip.zip, and cannot find /mnt/c/wamp64/www/phen/python/static/2019029.zip.ZIP, period.
+Archive:  /mnt/c/wamp64/www/phen/python/static/2019029.zip
+  End-of-central-directory signature not found.  Either this file is not
+  a zipfile, or it constitutes one disk of a multi-part archive.  In the
+  latter case the central directory and zipfile comment will be found on
+  the last disk(s) of this archive.
+note:  /mnt/c/wamp64/www/phen/python/static/2019029.zip may be a plain executable, not an archive
+unzip:  cannot find zipfile directory in one of /mnt/c/wamp64/www/phen/python/static/2019029.zip or
+        /mnt/c/wamp64/www/phen/python/static/2019029.zip.zip, and cannot find /mnt/c/wamp64/www/phen/python/static/2019029.zip.ZIP, period.
+deleted static
+2019029
+2019-01-30 11:46:47.735542
+['/usr/bin/wget', '-O', '/mnt/c/wamp64/www/phen/python/static/2019029.html.tmp', '--no-proxy', '-t', '3', '-o', 'dlhtml1.txt', '--no-check-certificate', '-L', '--user=fcarter', '--password=dS6oaPNwEAB7', '--no-parent', '-A', 'US_eMAE_NDVI.2019.*.QKM.*.zip', 'https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/2019/comp_029/']
+date 2019029 set to true
+('target is ', 'US_eMAE_NDVI.2019.023-029.QKM.COMPRES.006.2019030060949.zip')
+['/usr/bin/wget', '--no-proxy', '--show-progress', '-t', '3', '-o', 'dldata1.txt', '-O', '/mnt/c/wamp64/www/phen/python/static/2019029.zip', '--no-check-certificate', '-L', '--user=fcarter', '--password=dS6oaPNwEAB7', 'https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/2019/comp_029/US_eMAE_NDVI.2019.023-029.QKM.COMPRES.006.2019030060949.zip']
+startingunzip
+/usr/bin/unzip /mnt/c/wamp64/www/phen/python/static/2019029.zip -d /mnt/c/wamp64/www/phen/python/static/2019029
+0
+2019029
+2019-01-30 11:46:55.089632
+['/usr/bin/wget', '-O', '/mnt/c/wamp64/www/phen/python/static/2019029.html.tmp', '--no-proxy', '-t', '3', '-o', 'dlhtml1.txt', '--no-check-certificate', '-L', '--user=fcarter', '--password=dS6oaPNwEAB7', '--no-parent', '-A', 'US_eMAE_NDVI.2019.*.QKM.*.zip', 'https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/2019/comp_029/']
+date 2019029 set to true
+('target is ', 'US_eMAE_NDVI.2019.023-029.QKM.COMPRES.006.2019030060949.zip')
+['/usr/bin/wget', '--no-proxy', '--show-progress', '-t', '3', '-o', 'dldata1.txt', '-O', '/mnt/c/wamp64/www/phen/python/static/2019029.zip', '--no-check-certificate', '-L', '--user=fcarter', '--password=dS6oaPNwEAB7', 'https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/2019/comp_029/US_eMAE_NDVI.2019.023-029.QKM.COMPRES.006.2019030060949.zip']
+startingunzip
+/usr/bin/unzip /mnt/c/wamp64/www/phen/python/static/2019029.zip -d /mnt/c/wamp64/www/phen/python/static/2019029
+1
+2019029
+2019-01-30 11:47:20.329933
+['/usr/bin/wget', '-O', '/mnt/c/wamp64/www/phen/python/static/2019029.html.tmp', '--no-proxy', '-t', '3', '-o', 'dlhtml1.txt', '--no-check-certificate', '-L', '--user=fcarter', '--password=dS6oaPNwEAB7', '--no-parent', '-A', 'US_eMAE_NDVI.2019.*.QKM.*.zip', 'https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/2019/comp_029/']
+date 2019029 set to true
+('target is ', 'US_eMAE_NDVI.2019.023-029.QKM.COMPRES.006.2019030060949.zip')
+['/usr/bin/wget', '--no-proxy', '--show-progress', '-t', '3', '-o', 'dldata1.txt', '-O', '/mnt/c/wamp64/www/phen/python/static/2019029.zip', '--no-check-certificate', '-L', '--user=fcarter', '--password=dS6oaPNwEAB7', 'https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/2019/comp_029/US_eMAE_NDVI.2019.023-029.QKM.COMPRES.006.2019030060949.zip']
+startingunzip
+/usr/bin/unzip /mnt/c/wamp64/www/phen/python/static/2019029.zip -d /mnt/c/wamp64/www/phen/python/static/2019029
+2
+2019029
+2019-01-30 11:47:28.045945
+['/usr/bin/wget', '-O', '/mnt/c/wamp64/www/phen/python/static/2019029.html.tmp', '--no-proxy', '-t', '3', '-o', 'dlhtml1.txt', '--no-check-certificate', '-L', '--user=fcarter', '--password=dS6oaPNwEAB7', '--no-parent', '-A', 'US_eMAE_NDVI.2019.*.QKM.*.zip', 'https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/2019/comp_029/']
+date 2019029 set to true
+('target is ', 'US_eMAE_NDVI.2019.023-029.QKM.COMPRES.006.2019030060949.zip')
+['/usr/bin/wget', '--no-proxy', '--show-progress', '-t', '3', '-o', 'dldata1.txt', '-O', '/mnt/c/wamp64/www/phen/python/static/2019029.zip', '--no-check-certificate', '-L', '--user=fcarter', '--password=dS6oaPNwEAB7', 'https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/2019/comp_029/US_eMAE_NDVI.2019.023-029.QKM.COMPRES.006.2019030060949.zip']
+startingunzip
+/usr/bin/unzip /mnt/c/wamp64/www/phen/python/static/2019029.zip -d /mnt/c/wamp64/www/phen/python/static/2019029
+3
+2019029
+2019-01-30 11:47:35.749637
+['/usr/bin/wget', '-O', '/mnt/c/wamp64/www/phen/python/static/2019029.html.tmp', '--no-proxy', '-t', '3', '-o', 'dlhtml1.txt', '--no-check-certificate', '-L', '--Archive:  /mnt/c/wamp64/www/phen/python/static/2019029.zip
+  End-of-central-directory signature not found.  Either this file is not
+  a zipfile, or it constitutes one disk of a multi-part archive.  In the
+  latter case the central directory and zipfile comment will be found on
+  the last disk(s) of this archive.
+note:  /mnt/c/wamp64/www/phen/python/static/2019029.zip may be a plain executable, not an archive
+unzip:  cannot find zipfile directory in one of /mnt/c/wamp64/www/phen/python/static/2019029.zip or
+        /mnt/c/wamp64/www/phen/python/static/2019029.zip.zip, and cannot find /mnt/c/wamp64/www/phen/python/static/2019029.zip.ZIP, period.
+Archive:  /mnt/c/wamp64/www/phen/python/static/2019029.zip
+  End-of-central-directory signature not found.  Either this file is not
+  a zipfile, or it constitutes one disk of a multi-part archive.  In the
+  latter case the central directory and zipfile comment will be found on
+  the last disk(s) of this archive.
+note:  /mnt/c/wamp64/www/phen/python/static/2019029.zip may be a plain executable, not an archive
+unzip:  cannot find zipfile directory in one of /mnt/c/wamp64/www/phen/python/static/2019029.zip or
+        /mnt/c/wamp64/www/phen/python/static/2019029.zip.zip, and cannot find /mnt/c/wamp64/www/phen/python/static/2019029.zip.ZIP, period.
+Archive:  /mnt/c/wamp64/www/phen/python/static/201928.zip
+  End-of-central-directory signature not found.  Either this file is not
+  a zipfile, or it constitutes one disk of a multi-part archive.  In the
+  latter case the central directory and zipfile comment will be found on
+  the last disk(s) of this archive.
+note:  /mnt/c/wamp64/www/phen/python/static/201928.zip may be a plain executable, not an archive
+unzip:  cannot find zipfile directory in one of /mnt/c/wamp64/www/phen/python/static/201928.zip or
+        /mnt/c/wamp64/www/phen/python/static/201928.zip.zip, and cannot find /mnt/c/wamp64/www/phen/python/static/201928.zip.ZIP, period.
+Archive:  /mnt/c/wamp64/www/phen/python/static/201928.zip
+  End-of-central-directory signature not found.  Either this file is not
+  a zipfile, or it constitutes one disk of a multi-part archive.  In the
+  latter case the central directory and zipfile comment will be found on
+  the last disk(s) of this archive.
+note:  /mnt/c/wamp64/www/phen/python/static/201928.zip may be a plain executable, not an archive
+unzip:  cannot find zipfile directory in one of /mnt/c/wamp64/www/phen/python/static/201928.zip or
+        /mnt/c/wamp64/www/phen/python/static/201928.zip.zip, and cannot find /mnt/c/wamp64/www/phen/python/static/201928.zip.ZIP, period.
+user=fcarter', '--password=dS6oaPNwEAB7', '--no-parent', '-A', 'US_eMAE_NDVI.2019.*.QKM.*.zip', 'https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/2019/comp_029/']
+date 2019029 set to true
+('target is ', 'US_eMAE_NDVI.2019.023-029.QKM.COMPRES.006.2019030060949.zip')
+['/usr/bin/wget', '--no-proxy', '--show-progress', '-t', '3', '-o', 'dldata1.txt', '-O', '/mnt/c/wamp64/www/phen/python/static/2019029.zip', '--no-check-certificate', '-L', '--user=fcarter', '--password=dS6oaPNwEAB7', 'https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/2019/comp_029/US_eMAE_NDVI.2019.023-029.QKM.COMPRES.006.2019030060949.zip']
+startingunzip
+/usr/bin/unzip /mnt/c/wamp64/www/phen/python/static/2019029.zip -d /mnt/c/wamp64/www/phen/python/static/2019029
+4
+2019029
+2019-01-30 11:47:44.129781
+['/usr/bin/wget', '-O', '/mnt/c/wamp64/www/phen/python/static/2019029.html.tmp', '--no-proxy', '-t', '3', '-o', 'dlhtml1.txt', '--no-check-certificate', '-L', '--user=fcarter', '--password=dS6oaPNwEAB7', '--no-parent', '-A', 'US_eMAE_NDVI.2019.*.QKM.*.zip', 'https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/2019/comp_029/']
+date 2019029 set to true
+('target is ', 'US_eMAE_NDVI.2019.023-029.QKM.COMPRES.006.2019030060949.zip')
+['/usr/bin/wget', '--no-proxy', '--show-progress', '-t', '3', '-o', 'dldata1.txt', '-O', '/mnt/c/wamp64/www/phen/python/static/2019029.zip', '--no-check-certificate', '-L', '--user=fcarter', '--password=dS6oaPNwEAB7', 'https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/2019/comp_029/US_eMAE_NDVI.2019.023-029.QKM.COMPRES.006.2019030060949.zip']
+startingunzip
+/usr/bin/unzip /mnt/c/wamp64/www/phen/python/static/2019029.zip -d /mnt/c/wamp64/www/phen/python/static/2019029
+5
+201928
+2019-01-30 11:47:52.149869
+['/usr/bin/wget', '-O', '/mnt/c/wamp64/www/phen/python/static/201928.html.tmp', '--no-proxy', '-t', '3', '-o', 'dlhtml1.txt', '--no-check-certificate', '-L', '--user=fcarter', '--password=dS6oaPNwEAB7', '--no-parent', '-A', 'US_eMAE_NDVI.2019.*.QKM.*.zip', 'https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/2019/comp_28/']
+date 201928 set to false
+['/usr/bin/wget', '--no-proxy', '--show-progress', '-t', '3', '-o', 'dldata1.txt', '-O', '/mnt/c/wamp64/www/phen/python/static/201928.zip', '--no-check-certificate', '-L', '--user=fcarter', '--password=dS6oaPNwEAB7', 'https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/2019/comp_28/US_eMAE_NDVI.2019.023-029.QKM.COMPRES.006.2019030060949.zip']
+startingunzip
+/usr/bin/unzip /mnt/c/wamp64/www/phen/python/static/201928.zip -d /mnt/c/wamp64/www/phen/python/static/201928
+0
+201928
+2019-01-30 11:47:59.573004
+['/usr/bin/wget', '-O', '/mnt/c/wamp64/www/phen/python/static/201928.html.tmp', '--no-proxy', '-t', '3', '-o', 'dlhtml1.txt', '--no-check-certificate', '-L', '--user=fcarter', '--password=dS6oaPNwEAB7', '--no-parent', '-A', 'US_eMAE_NDVI.2019.*.QKM.*.zip', 'https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/2019/comp_28/']
+date 201928 set to false
+['/usr/bin/wget', '--no-proxy', '--show-progress', '-t', '3', '-o', 'dldata1.txt', '-O', '/mnt/c/wamp64/www/phen/python/static/201928.zip', '--no-check-certificate', '-L', '--user=fcarter', '--password=dS6oaPNwEAB7', 'https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/2019/comp_28/US_eMAE_NDVI.2019.023-029.QKM.COMPRES.006.2019030060949.zip']
+startingunzip
+/usr/bin/unzip /mnt/c/wamp64/www/phen/python/static/201928.zip -d /mnt/c/wamp64/www/phen/python/static/201928
+1
+201928
+2019-01-30 11:48:06.079539
+['/usr/bin/wget', '-O', '/mnt/c/wamp64/www/phen/python/static/201928.html.tmp', '--no-proxy', '-t', '3', '-o', 'dlhtml1.txt', '--no-check-certificate', '-L', '--user=fcarter', '--password=dS6oaPNwEAB7', '--no-parent', '-A', 'US_eMAE_NDVI.2019.*.QKM.*.zip', 'https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/2019/comp_28/']
+date 201928 set to false
+['/usr/bin/wget', '--no-proxy', '--show-progress', '-t', '3', '-o', 'dldata1.txt', '-O', '/mnt/c/wamp64/www/phen/python/static/201928.zip', '--no-check-certificate', '-L', '--userArchive:  /mnt/c/wamp64/www/phen/python/static/201928.zip
+  End-of-central-directory signature not found.  Either this file is not
+  a zipfile, or it constitutes one disk of a multi-part archive.  In the
+  latter case the central directory and zipfile comment will be found on
+  the last disk(s) of this archive.
+note:  /mnt/c/wamp64/www/phen/python/static/201928.zip may be a plain executable, not an archive
+unzip:  cannot find zipfile directory in one of /mnt/c/wamp64/www/phen/python/static/201928.zip or
+        /mnt/c/wamp64/www/phen/python/static/201928.zip.zip, and cannot find /mnt/c/wamp64/www/phen/python/static/201928.zip.ZIP, period.
+Archive:  /mnt/c/wamp64/www/phen/python/static/201928.zip
+  End-of-central-directory signature not found.  Either this file is not
+  a zipfile, or it constitutes one disk of a multi-part archive.  In the
+  latter case the central directory and zipfile comment will be found on
+  the last disk(s) of this archive.
+note:  /mnt/c/wamp64/www/phen/python/static/201928.zip may be a plain executable, not an archive
+unzip:  cannot find zipfile directory in one of /mnt/c/wamp64/www/phen/python/static/201928.zip or
+        /mnt/c/wamp64/www/phen/python/static/201928.zip.zip, and cannot find /mnt/c/wamp64/www/phen/python/static/201928.zip.ZIP, period.

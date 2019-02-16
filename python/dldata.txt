@@ -1,0 +1,15 @@
+Will not apply HSTS. The HSTS database must be a regular and non-world-writable file.
+ERROR: could not open HSTS store at '/home/donsaguaro/.wget-hsts'. HSTS will be disabled.
+--2019-02-16 17:12:09--  https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/2019/comp_032/US_eMAE_NDVI.2019.026-032.QKM.COMPRES.006.2019033061745.zip
+Resolving dds.cr.usgs.gov (dds.cr.usgs.gov)... 152.61.133.67, 152.61.133.66, 2001:49c8:4000:124c::66
+Connecting to dds.cr.usgs.gov (dds.cr.usgs.gov)|152.61.133.67|:443... connected.
+HTTP request sent, awaiting response... 401 Unauthorized
+Authentication selected: Basic realm="USGS EarthExplorer"
+Connecting to dds.cr.usgs.gov (dds.cr.usgs.gov)|152.61.133.67|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 298967401 (285M) [application/zip]
+Saving to: ‘/mnt/c/wamp64/www/phen2/python/static/2019032.zip’
+
+
+2019-02-16 17:15:37 (1.38 MB/s) - ‘/mnt/c/wamp64/www/phen2/python/static/2019032.zip’ saved [298967401/298967401]
+

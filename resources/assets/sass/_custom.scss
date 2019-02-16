@@ -1,0 +1,272 @@
+body {
+  color: rgb(0, 0, 0);
+  background-color: #fff8e7;
+  font-family: Calibri, sans-serif;
+  font-size: 18px;
+  line-height: 1;
+}
+
+#udpbody {
+  size: A4 landscape;
+}
+
+.colorLegend {
+  background: white;
+  padding: 0.2rem;
+}
+.btn-success {
+  color: #000;
+  background-color: $main-green;
+  border-color: #f8e8d2;
+}
+.centerInTd {
+  text-align: center;
+}
+
+.invadorCheck {
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding: 10px;
+}
+
+#cargarbutton {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  background: #449eff;
+  padding: 3px;
+  text-decoration: none;
+  color: initial;
+}
+
+.bg-danger2 {
+  background-color: rgb(255, 106, 106);
+}
+.warnings {
+  margin: 1rem 0 1rem 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.bodycontainer {
+  padding: 20px;
+  height: 90vh;
+}
+tbody tr td:first-child {
+  max-width: 120px;
+}
+
+tbody#measurementTBodyForm {
+  display: table;
+  table-layout: fixed;
+}
+.allinputs {
+  width: 115px;
+}
+
+.table-bordered th,
+.table-bordered td {
+  background-color: #ffffff;
+  border: 0.5px solid #000;
+  padding-left: 3px;
+}
+.table thead th {
+  background-color: $main-green;
+  border: 0.5px solid #000;
+  padding: 2px;
+}
+
+.horainputs {
+  width: 110px;
+}
+.mymapcontainer {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  max-width: 2000px;
+}
+.mapstat {
+  display: flex;
+  min-width: 100%;
+  width: 0;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
+.mymapdiv {
+  min-width: 900px;
+}
+.udplayout {
+  display: grid;
+  background-color: #b2d5fc;
+  grid-template-columns: 600px 400px;
+  grid-template-rows: 500px 40px 100px;
+}
+
+#udpmapdiv {
+  background-color: #c2ff5f;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  height: 100%;
+  padding: 10px;
+}
+
+.mystatdiv {
+  min-width: 500px;
+  height: 100%;
+}
+.featureInfoTable tbody tr td {
+  text-align: center;
+}
+.featureInfoTable thead {
+  text-align: center;
+}
+.speciesTable tbody tr td {
+  text-align: center;
+}
+.speciesTable thead {
+  text-align: center;
+}
+.withcontrol {
+  height: 100%;
+}
+input#mode {
+  background-color: lightsteelblue;
+  pointer-events: none;
+}
+
+.fechainputs {
+  width: 170px;
+}
+/* td.formcolumnlabels {
+    text-align: center;
+} */
+
+td.cuadrante {
+  text-align: center;
+}
+.octothorp {
+  text-align: center;
+}
+
+.myspacer {
+  border-bottom: 1px solid #000;
+}
+
+.formtitles {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+td.especie_title {
+  padding-left: 20px;
+}
+
+td.formcolumnlabels {
+  padding-left: 10px;
+}
+.cuadranteinput {
+  width: 20px;
+  text-align: center;
+}
+
+.dropDownTitles {
+  font-weight: bold;
+  font-size: 16px;
+  padding-right: 10px;
+  padding-top: 9px;
+}
+
+.hiddenrows {
+  display: none;
+}
+
+p.spec::after {
+  content: "        ";
+  white-space: pre;
+}
+
+/* .hideme{
+    display:none;
+} */
+
+.mytable {
+  empty-cells: show;
+}
+
+.wrapper2 {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+/* a:visited {
+    color:saddlebrown;
+} */
+/* a:link {
+    color:rgb(255, 247, 228);
+} */
+a:hover {
+  color: rgb(57, 30, 0);
+}
+.btn-custom {
+  color: saddlebrown;
+  background-color: antiquewhite;
+}
+/* nav a:visited {
+    color:beige;
+} */
+/* nav a:link {
+    color:rgb(0, 35, 66);
+} */
+a {
+  color: #000000;
+}
+nav a:hover {
+  color: saddlebrown;
+}
+
+.mynavbar {
+  color: rgb(39, 22, 0);
+  background-color: $main-green;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.titleHeaders{
+  text-align: center;
+}
+.creditFooter{ 
+  
+}
+
+#loginGrid{
+  display: grid;
+  grid: 100px 1fr 2fr 1fr 100px / 1fr 1fr 1fr;
+  height:100%
+}
+
+#loginHeader{
+  grid-row: 1 / 2;
+  grid-column: 1 / 4;
+} 
+
+#loginBody{
+  grid-row:3 / 4;
+  grid-column: 2 / 3;
+} 
+
+#loginFooter{
+  grid-row:6 / 7;
+  grid-column: 2 / 3;
+} 
