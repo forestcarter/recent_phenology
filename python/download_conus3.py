@@ -4,6 +4,8 @@ import shlex
 import subprocess
 from datetime import datetime, timedelta
 downloadbool=True
+print (str(datetime.now()))
+
 class Dldate:
     def __init__(self, subtract, julday, year):
         self.subtract = subtract
@@ -51,7 +53,6 @@ if downloadbool:
     datearray2=[]
     dlfailed = False
 
-    print(datearray)
     for index,mydate in enumerate(datearray):
         totaltries=0
         trial=0
@@ -65,7 +66,7 @@ if downloadbool:
             indexfile = os.path.join(staticpath,'{0}.html.tmp'.format(mydate.yearjul))                       
             zipdestination = os.path.join(staticpath,mydate.yearjul)
             url1= 'https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/{0}/comp_{1}/'.format(mydate.year,mydate.julday)
-            htmldl=['/usr/bin/wget', '-O', indexfile, '--no-proxy', '-t', '3', '-o', os.path.join(python_dir,'dlhtml.txt'), '--no-check-certificate', '-L', '--user='+username, '--password='+password, '--no-parent', '-A', 'US_eMAE_NDVI.'+mydate.year+'.*.QKM.*.zip',url1]
+            htmldl=['/usr/bin/wget', '-O', indexfile, '--no-proxy', '-t', '3', '-o', os.path.join(python_dir,'static','dlhtml.txt'), '--no-check-certificate', '-L', '--user='+username, '--password='+password, '--no-parent', '-A', 'US_eMAE_NDVI.'+mydate.year+'.*.QKM.*.zip',url1]
             print (htmldl) 
             subprocess.call(htmldl)
             
@@ -85,7 +86,7 @@ if downloadbool:
                     print ("target is ",target)
                     mydate.target = target
             url2 = "https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/{0}/comp_{1}/{2}".format(mydate.year,mydate.julday,target)
-            dllist =['/usr/bin/wget', '--no-proxy', '--show-progress', '-t', '3', '-o', os.path.join(python_dir,'dldata.txt'), '-O', zipdestination+'.zip', '--no-check-certificate', '-L', '--user='+username, '--password='+password, url2]
+            dllist =['/usr/bin/wget', '--no-proxy', '--show-progress', '-t', '3', '-o', os.path.join(python_dir,'static','dldata.txt'), '-O', zipdestination+'.zip', '--no-check-certificate', '-L', '--user='+username, '--password='+password, url2]
             print(dllist)
             subprocess.call(dllist)
             print("startingunzip")
@@ -119,10 +120,7 @@ if downloadbool:
     targetdatearray=datearray2
 
 if len(targetdatearray)==len(minusarray):
-    print (str(datetime.now()))
   
-  
-
     for (ind, mydate) in enumerate(targetdatearray):
         for item1 in os.listdir(os.path.join(staticpath,mydate.yearjul)):
             if 'QKM.VI_NDVI' in item1 and item1[-3:]=='tif':
@@ -135,6 +133,8 @@ if len(targetdatearray)==len(minusarray):
         subprocess.call(['gdalwarp', "-s_srs", "EPSG:2163", "-t_srs", "EPSG:4326", "-of", "VRT", "-overwrite",ndvi, ndviwarp])
         subprocess.call(['gdalwarp', "-s_srs", "EPSG:2163", "-t_srs", "EPSG:4326", "-of", "VRT", "-overwrite",qual, qualwarp])
 
+        
+
         if ind==0:
             firstndviwarp=ndviwarp
             firstqualwarp=qualwarp
@@ -142,7 +142,10 @@ if len(targetdatearray)==len(minusarray):
             subprocess.call(["python",os.path.join(python_dir,'gdal_calc.py'), "--type=Int32", "-A", firstndviwarp, "-B", ndviwarp, "--outfile={0}".format(forsave), "--calc","-13000+13000*(B<1)+A*(B<1)", "--overwrite"])
             savetodb =("raster2pgsql -s 4326 -t auto -I -C -M -F {0} public.{1} | PGPASSWORD=pcsemarnat! psql -U root -d ndvidb2").format(forsave,mydate.yearjul)
             print(savetodb)
-            suboutput = subprocess.check_output(savetodb,shell=True)
+            try:
+                suboutput = subprocess.check_output(savetodb,shell=True)
+            except:
+                pass
             myfirstyearjul = mydate.yearjul
         else:
             colorsfile = os.path.join(python_dir,"colors.txt")
@@ -156,60 +159,9 @@ if len(targetdatearray)==len(minusarray):
             subprocess.call(["python", os.path.join(python_dir,'gdal_calc.py'), "--type=Int32", "-A", firstndviwarp, "-B", postqual,"--outfile={0}".format(postqualpostsea), "--calc","-13005+13005*(A>-2000)+B*(A>-2000)", "--overwrite"])
 
             subprocess.call(['gdaldem', "color-relief", "-of", "VRT",postqualpostsea, colorsfile, withcolor])
-            if os.path.isdir(tilespath):
+            if os.path.isdir(tilespath) and ind==1:
                 os.system("rm -rf {}".format(tilespath))
                 print ('deleted tilespath')
-            os.system("mkdir {}".format(tilespath))
+                os.system("mkdir {}".format(tilespath))
             subprocess.call(["python", os.path.join(python_dir,'gdal2tiles.py'), "-z", "1-4", withcolor, outfolder])
-
-    # outfolder=os.path.join("/","mnt","c","wamp64","www","phen",'public','tiles2','rmd','1','ndvi')
-    # newndviraw = os.path.join(staticpath,"newndviraw.vrt")
-    # oldndviraw = os.path.join(staticpath,"oldndviraw.vrt")
-    # newqualraw = os.path.join(staticpath,"newqualraw.vrt")
-    # oldqualraw = os.path.join(staticpath,"oldqualraw.vrt")
-    # postdiff = os.path.join(staticpath,"postdiff.vrt")
-    # postqual = os.path.join(staticpath,"postqual.vrt")
-    # gtif= os.path.join(staticpath,"gtif")
-    # withcolor= os.path.join(staticpath,"withcolor.vrt")
-    # forsave= os.path.join(staticpath,"forsave.vrt")
-
-    # for item1 in os.listdir(os.path.join(staticpath,mydate.yearjul)):
-    #     if 'QKM.VI_NDVI' in item1 and item1[-3:]=='tif':
-    #         tif=os.path.join(staticpath,mydate.yearjul,item1)
-    #     if 'QKM.VI_QUAL' in item1 and item1[-3:]=='tif':
-    #         qual=os.path.join(staticpath,'histunzipped1',item1)
-    # for item2 in os.listdir(os.path.join(staticpath,'histunzipped2')):
-    #         if 'QKM.VI_NDVI' in item2 and item2[-3:]=='tif':
-    #             newtif=os.path.join(staticpath,'histunzipped2',item2)
-    #         if 'QKM.VI_QUAL' in item2 and item2[-3:]=='tif':
-    #             newqual=os.path.join(staticpath,'histunzipped2',item2)
-
-    # #Change projections
-    # subprocess.call(['gdalwarp', "-s_srs", "EPSG:2163", "-t_srs", "EPSG:4326", "-of", "VRT", "-overwrite",newtif, newndviraw])
-    # subprocess.call(['gdalwarp', "-s_srs", "EPSG:2163", "-t_srs", "EPSG:4326", "-of", "VRT", "-overwrite",oldtif, oldndviraw])
-    # subprocess.call(['gdalwarp', "-s_srs", "EPSG:2163", "-t_srs", "EPSG:4326", "-of", "VRT", "-overwrite",newqual, newqualraw])
-    # subprocess.call(['gdalwarp', "-s_srs", "EPSG:2163", "-t_srs", "EPSG:4326", "-of", "VRT", "-overwrite",oldqual, oldqualraw])
-
-    # ###New minus old, high values have greened up
-    # ##subprocess.call(["python",'gdal_calc.py', "--type=Int32", "-A", newndviraw, "-B", oldndviraw, "--outfile={0}".format(postdiff), "--calc","A-B", "--overwrite"])
-    # subprocess.call(["python",'gdal_calc.py', "--type=Int32", "-A", newndviraw, "-B", oldndviraw, "-C", newqualraw,"-D", oldqualraw,"--outfile={0}".format(postqual), "--calc","-13000+13000*(C<1)*(D<1)+A*(C<1)*(D<1)-B*(C<1)*(D<1)", "--overwrite"])
-
-    # ###Change color
-    # subprocess.call(['gdaldem', "color-relief", "-of", "VRT",postqual, colorsfile, withcolor])
-
-    # ### Tile it!
-    # #subprocess.call(["python", os.path.join('gdal2tiles.py'), "-z", "1-12", withcolor, outfolder])
-
-    # ### Save it         
-    # subprocess.call(["python",'gdal_calc.py', "--type=Int32", "-A", newndviraw, "-B", newqualraw, "--outfile={0}".format(forsave), "--calc","-13000+13000*(B<1)+A*(B<1)", "--overwrite"])
-
-    # mystring =("raster2pgsql -s 4326 -t auto -I -C -M -F {0} public.{1}{2} | PGPASSWORD=pcsemarnat! psql -U donsaguaro -d ndvidb").format(forsave,year,julday)
-    # print("step5.3")
-    # print(mystring)
-    # suboutput= subprocess.check_output(mystring,shell=True)
-
-
-    # print str(datetime.datetime.now())
-
-
-
+print (str(datetime.now()))
