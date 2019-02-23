@@ -44341,7 +44341,7 @@ var Mapapp = function (_React$Component) {
               while (1) {
                 switch (_context.prev = _context.next) {
                   case 0:
-                    myapi = "https://recentphenology/api/getvalues";
+                    myapi = "https://recentphenology.com/api/getvalues";
 
                     if (window.location.host == "localhost:3000") myapi = "http://localhost:3000/api/getvalues";
                     _context.next = 4;

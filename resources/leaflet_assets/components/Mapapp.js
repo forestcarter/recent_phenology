@@ -27,7 +27,7 @@ class Mapapp extends React.Component {
     }));
 
     async function getValues(lat,lng) {
-      let myapi = "https://recentphenology/api/getvalues";
+      let myapi = "https://recentphenology.com/api/getvalues";
       if (window.location.host == "localhost:3000")
         myapi = "http://localhost:3000/api/getvalues";
       const rawResponse = await fetch(myapi, {
