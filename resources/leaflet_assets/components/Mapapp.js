@@ -10,6 +10,7 @@ class Mapapp extends React.Component {
     this.handleMapClick = this.handleMapClick.bind(this);
     this.handleOpacityChange = this.handleOpacityChange.bind(this);
     this.state = {
+      loading:false,
       valuesResult:[],
       clickLocation: { lat: 18.69349, lng: 360 - 98.16245 },
       mapSettings: {
@@ -24,6 +25,9 @@ class Mapapp extends React.Component {
         lat: event.latlng.lat,
         lng: event.latlng.lng
       }
+    }));
+    this.setState(prevState => ({
+      loading: true
     }));
 
     async function getValues(lat,lng) {
@@ -50,6 +54,9 @@ class Mapapp extends React.Component {
       getValues(event.latlng.lat,event.latlng.lng).then(valuesResult => {
         this.setState(prevState => ({
           valuesResult: valuesResult
+        }));
+        this.setState(prevState => ({
+          loading: false
         }));
         console.log(valuesResult)
       });
@@ -83,9 +90,9 @@ class Mapapp extends React.Component {
             </div>
             
             <div id='graph'> 
-              <Graph     
-              valuesResult={this.state.valuesResult} 
+            {this.state.loading?<p>Loading.......</p> :<Graph valuesResult={this.state.valuesResult} 
               />
+            }
             </div>
 
             <div id="textareadiv">

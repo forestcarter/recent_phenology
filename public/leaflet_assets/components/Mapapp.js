@@ -44319,6 +44319,7 @@ var Mapapp = function (_React$Component) {
     _this.handleMapClick = _this.handleMapClick.bind(_this);
     _this.handleOpacityChange = _this.handleOpacityChange.bind(_this);
     _this.state = {
+      loading: false,
       valuesResult: [],
       clickLocation: { lat: 18.69349, lng: 360 - 98.16245 },
       mapSettings: {
@@ -44393,6 +44394,11 @@ var Mapapp = function (_React$Component) {
                     }
                   };
                 });
+                this.setState(function (prevState) {
+                  return {
+                    loading: true
+                  };
+                });
 
                 getValues(event.latlng.lat, event.latlng.lng).then(function (valuesResult) {
                   _this2.setState(function (prevState) {
@@ -44400,10 +44406,15 @@ var Mapapp = function (_React$Component) {
                       valuesResult: valuesResult
                     };
                   });
+                  _this2.setState(function (prevState) {
+                    return {
+                      loading: false
+                    };
+                  });
                   console.log(valuesResult);
                 });
 
-              case 2:
+              case 3:
               case "end":
                 return _context2.stop();
             }
@@ -44452,8 +44463,11 @@ var Mapapp = function (_React$Component) {
           _react2.default.createElement(
             "div",
             { id: "graph" },
-            _react2.default.createElement(_Graph2.default, {
-              valuesResult: this.state.valuesResult
+            this.state.loading ? _react2.default.createElement(
+              "p",
+              null,
+              "Loading......."
+            ) : _react2.default.createElement(_Graph2.default, { valuesResult: this.state.valuesResult
             })
           ),
           _react2.default.createElement(

@@ -10499,8 +10499,6 @@ body {
 }
 
 #graph {
-  padding: 10px;
-  padding-left: 0px;
   height: 100%;
   grid-area: graph;
 }
