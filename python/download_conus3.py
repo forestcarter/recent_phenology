@@ -14,7 +14,7 @@ class Dldate:
         self.yearjul = str(year)+julday
         self.target = 'none'
 
-minusarray = [1,8,15]
+minusarray = [2,9,16]
 python_dir = os.path.dirname(os.path.realpath(__file__))
 staticpath = os.path.join(python_dir,'static')
 tilespath = os.path.join(python_dir,"..",'public','tiles4')
@@ -139,7 +139,7 @@ if len(targetdatearray)==len(minusarray):
             firstndviwarp=ndviwarp
             firstqualwarp=qualwarp
             forsave = os.path.join(staticpath, mydate.yearjul+"forsave")
-            subprocess.call(["python",os.path.join(python_dir,'gdal_calc.py'), "--type=Int32", "-A", firstndviwarp, "-B", ndviwarp, "--outfile={0}".format(forsave), "--calc","-13000+13000*(B<1)+A*(B<1)", "--overwrite"])
+            subprocess.call(["python",os.path.join(python_dir,'gdal_calc.py'), "--type=Int32", "-A", firstndviwarp, "-B", firstqualwarp, "--outfile={0}".format(forsave), "--calc","-13000+13000*(B<1)+A*(B<1)", "--overwrite"])
             savetodb =("raster2pgsql -s 4326 -t auto -I -C -M -F {0} public.{1} | PGPASSWORD=pcsemarnat! psql -U root -d ndvidb2").format(forsave,mydate.yearjul)
             print(savetodb)
             try:

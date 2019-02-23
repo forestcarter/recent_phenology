@@ -19,7 +19,7 @@ class MapControl extends React.Component {
             <div className="form-group row  justify-content-start align-items-center p-1 mx-3">
                
                 <div className ="p-3">
-                    <label className="style_option">Opacidad</label>
+                    <label className="style_option">Opacity</label>
                     <select name='table_option' id='table_optionOpacity' defaultValue="0.6" onChange={this.handleOpacityChange} className='table_option form-control '>
                         <option value="1.0">1.0</option>
                         <option value="0.8">0.8</option>

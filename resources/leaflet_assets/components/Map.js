@@ -2,7 +2,7 @@ import React from "react";
 import L from "leaflet";
 
 const style = {
-  height: "600px"
+  height: "90vh"
 };
 
 class Map extends React.Component {
@@ -54,7 +54,7 @@ class Map extends React.Component {
     // L.control.layers(this.baseMaps,this.overlaymaps).addTo(this.map);
     L.control.layers(this.baseMaps,this.overlaymaps).addTo(this.map);
 
-    
+    this.map.on("click", this.props.handleMapClick);
     this.map.scrollWheelZoom.disable()
     ///////////LEGENDNEW////////////
 

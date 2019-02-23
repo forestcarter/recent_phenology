@@ -30,6 +30,7 @@
         "react": "16.6.0",
         "react-bootstrap-table-next": "^1.4.2",
         "react-dom": "16.6.0",
+        "recharts": "^1.5.0",
         "regenerator-runtime": "^0.12.1"
     }
 }

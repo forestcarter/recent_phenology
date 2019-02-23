@@ -17,240 +17,50 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('getboundingfeatures', function(Request $request) {
-    $result="There was an error";
-    $north =  $request->north;
-    $east =  $request->east;
-    $south =  $request->south;
-    $west =  $request->west;
-    $udpiden = $request->udpiden;
+Route::post('getvalues', function(Request $request) {
+    $lat =  $request->lat;
+    $lng =  $request->lng;
+    $date = new DateTime();
+    $valuearray=[];
+    for ($i=0; $i < 30; $i++) { 
+      $date->modify("-1 day");
+      $doy = $date->format('z');
+      $missing = 3 - strlen("{$doy}");
+      $missing == 1 && $doy="0".$doy;
+      $missing == 2 && $doy="00".$doy;
 
-    $totalsql = "SELECT ST_Area((select geom from udp_puebla_4326 where iden={$udpiden}))";
-    $totalarea=DB::select($totalsql,[])[0]->st_area;
-    //Bounding box and soils 
-    $sql =   
-      "SELECT distinct descripcio, color
-      FROM usos_de_suelo4 
-      where ST_Intersects(usos_de_suelo4.geom,                        
-      ST_GeomFromText('POLYGON(({$east} {$north},{$east} {$south},{$west} {$south},{$west} {$north},{$east} {$north}))',4326))";
-    //udp and soils 
-    $sqludp =   
-      "SELECT gid, descripcio, color, 2 as aislado, {$totalarea} as totalarea, false as ismulti
-      FROM usos_de_suelo4 
-      where ST_Intersects(usos_de_suelo4.geom,
-      (select geom from udp_puebla_4326 where iden={$udpiden}))";
-    //udp and water lines 
-    $sqludplineaagua =   
-      "SELECT gid, nombre 
-      FROM agua_lineas 
-      where ST_Intersects(agua_lineas.geom,
-      (select geom from udp_puebla_4326 where iden={$udpiden}))";
-      //udp and water points
-    $sqludppuntoagua =   
-      "SELECT gid, nombre 
-      FROM agua_puntos 
-      where ST_Intersects(agua_puntos.geom,
-      (select geom from udp_puebla_4326 where iden={$udpiden}))";
+      $year = $date->format('Y');
+      $displaydate = $date->format('m-d');
 
-      //udp and water poli
-    $sqludppoliagua =   
-    "SELECT gid, nombre 
-    FROM agua_poligonos 
-    where ST_Intersects(agua_poligonos.geom,
-    (select geom from udp_puebla_4326 where iden={$udpiden}))";
+      $yeardoy="{$year}{$doy}";
+      $currentarray = array("date"=>$displaydate);
 
-    //which munis interect with udp
-    $sqludpmuni =   
-    "SELECT nomgeo 
-    FROM municipio_puebla_4326 
-    where ST_Intersects(ST_SetSRID(municipio_puebla_4326.geom, 4326),
-    (select geom from udp_puebla_4326 where iden={$udpiden}))";
-      
-    if (is_numeric($north) && is_numeric($east) && is_numeric($south) && is_numeric($west)){
-      $result = DB::select($sql,[]);
-    }
-
-    $resultudp = DB::select($sqludp,[]);
-
-    $resultudplineaagua = DB::select($sqludplineaagua,[]);
-    $resultudppuntoagua = DB::select($sqludppuntoagua,[]);
-    $resultudppoliagua = DB::select($sqludppoliagua,[]);
-    $resultudpmuni = DB::select($sqludpmuni,[]);
-
-    
-
-    //Get length of water lines
-    $agualength =0;
-    foreach($resultudplineaagua AS $row2) {
-      $agualinegid = $row2->gid;
- 
-      //get length of water lines in udp
-      $lengthsql="SELECT ST_Length(ST_INTERSECTION((select geom from agua_lineas where gid = ?), (select geom from  udp_puebla_4326 where iden=?)))";
-      $lengthresult = DB::select($lengthsql,[$agualinegid,$udpiden]);
-      $agualength= $agualength + (float)($lengthresult[0]->st_length);
-    }
-    $aguaarea = 0;
-    foreach($resultudppoliagua AS $row3) {
-      $aguapoligid = $row3->gid;
-      //get length of water lines in udp
-      $areasql="SELECT ST_Area(ST_INTERSECTION((select geom from agua_poligonos where gid = ?), (select geom from  udp_puebla_4326 where iden=?)))";
-      $arearesult = DB::select($areasql,[$aguapoligid,$udpiden]);
-      $aguaarea= $aguaarea + (float)($arearesult[0]->st_area);
-    }
-
-    $multisql =" SELECT (ST_DUMP(ST_INTERSECTION((select geom from usos_de_suelo4 where gid = ?), 
-          (select geom from udp_puebla_4326 where iden=?)
-          ))).geom::geometry(Polygon,4326)";
-
-    $newrows=[];
-    foreach($resultudp AS $row) {
-      $gid = $row->gid;
-      //If soil is completely within, within set to 1. Unassigned is 2
-      $withinsql ="SELECT ST_Within(usos_de_suelo4.geom, (select geom from udp_puebla_4326 where iden=?)) from usos_de_suelo4 where gid = ?";
-      $withinresult = DB::select($withinsql,[$udpiden,$gid]);
-      if ($withinresult[0]->st_within){
-        $row->aislado=1;
+      //$yeardoy="2019028";
+      if (DB::select("SELECT to_regclass('public.{$yeardoy}')")[0]->to_regclass == null){
+        $currentarray['NDVI']=null;
       }else{
-        $row->aislado=0;
-      }
-      
-      $multiresult = DB::select($multisql,[$gid,$udpiden]);
-      foreach($multiresult AS $patchrow) {
-        $areasql ="SELECT ST_Area(?)";
-        $arearesult = DB::select($areasql,[$patchrow->geom]);
-        $newrow = new stdClass();
-        $newrow->area=(float)($arearesult[0]->st_area);
-        
-        $newrow->descripcio=$row->descripcio;
-        $newrow->totalarea=$row->totalarea;
-        $newrow->color=$row->color;
-        $newrow->aislado=$row->aislado;
-        //Aisilado for smallest subdivsions 
-        // $withinsql2 ="SELECT ST_Within(?, (select geom from udp_puebla_4326 where iden=?))";
-        // $withinresult2 = DB::select($withinsql2,[$patchrow->geom,$udpiden]);
-        // if ($withinresult2[0]->st_within){
-        //   $newrow->aislado=1;
-        // }else{
-        //   $newrow->aislado=0;
-        // }
-
-        //Data that free-rides on resultudp
-        $newrow->agualength=$agualength;
-        $newrow->aguacount=sizeof($resultudppuntoagua)/2;
-        $newrow->aguaarea=$aguaarea;
-        $newrow->munilist=$resultudpmuni;
-        $newrows[]=$newrow;
-      }
-      //get area of usos de suelo
-      // $areasql ="SELECT ST_Area(ST_INTERSECTION(usos_de_suelo4.geom, (select geom from udp_puebla_4326 where iden=?))) from usos_de_suelo4 where gid = ?";
-      // $arearesult = DB::select($areasql,[$udpiden,$gid]);
-      // $row->area=(float)($arearesult[0]->st_area);
-      
-     
-      //Data that free-rides on resultudp
-      // $row->agualength=$agualength;
-      // $row->aguacount=sizeof($resultudppuntoagua)/2;
-      // $row->aguaarea=$aguaarea;
-      // $row->munilist=$resultudpmuni;
-
-
-    }
-    
-    
-
-/////////////AGUA///////////
-    class layer
-    {
-        public $tableName;
-        public $displayName;
-        public $color;
-        public $fillColor;
-        public $opacity;
-        public $weight;
-        public $fillOpacity;
-    }
-
-    $layer2 = new layer();
-    $layer2->tableName = 'agua_lineas';
-    $layer2->displayName = 'Agua Lineas';
-    $layer2->featureColumn = 'nombre';
-    $layer2->color = 'blue';
-    $layer2->fillColor = 'blue';
-    $layer2->opacity = 1;
-    $layer2->weight = 1;
-    $layer2->fillOpacity = 1;
-    $layer2->sql = "SELECT nombre, ST_AsGeoJSON(geom, 5) AS geojson FROM agua_lineas
-      where ST_Intersects(agua_lineas.geom,                        
-      ST_GeomFromText('POLYGON(({$east} {$north},{$east} {$south},{$west} {$south},{$west} {$north},{$east} {$north}))',4326))";
-
-    $layer3 = new layer();
-    $layer3->tableName = 'agua_poligonos';
-    $layer3->displayName = 'Agua Poligonos';
-    $layer3->featureColumn = 'nombre';
-    $layer3->color = 'black';
-    $layer3->fillColor = 'blue';
-    $layer3->opacity = 1;
-    $layer3->weight = 1;
-    $layer3->fillOpacity = 1;
-    $layer3->sql = "SELECT nombre, ST_AsGeoJSON(geom, 5) AS geojson FROM agua_poligonos
-      where ST_Intersects(agua_poligonos.geom,                        
-      ST_GeomFromText('POLYGON(({$east} {$north},{$east} {$south},{$west} {$south},{$west} {$north},{$east} {$north}))',4326))";
-      
-    $layer4 = new layer();
-    $layer4->tableName = 'agua_puntos';
-    $layer4->displayName = 'Agua Puntos';
-    $layer4->featureColumn = 'nombre';
-    $layer4->color = 'black';
-    $layer4->fillColor = 'black';
-    $layer4->opacity = 1;
-    $layer4->weight = 1;
-    $layer4->fillOpacity = 1;
-    $layer4->sql = "SELECT nombre, ST_AsGeoJSON(geom, 5) AS geojson FROM agua_puntos
-      where ST_Intersects(agua_puntos.geom,                        
-      ST_GeomFromText('POLYGON(({$east} {$north},{$east} {$south},{$west} {$south},{$west} {$north},{$east} {$north}))',4326))";
-
-    $layersArray = array($layer2,$layer3,$layer4);
-    $mytext = 'none';
-    foreach ($layersArray as $layer) {
-      $features=[];
-      $result2 = DB::select($layer->sql,[]);
-        if (isset($result[0])){
-          foreach($result2 AS $row2){
-            if (isset($row2->geom)){
-              unset($row2->geom);
-            }
-            $geometry=$row2->geojson=json_decode($row2->geojson);
-            unset($row2->geojson);
-
-            $row2->name=$layer->tableName;
-            $row2->displayName=$layer->displayName;
-            $row2->featureColumn=$layer->featureColumn;
-            
-            $feature=["type"=>"Feature", "geometry"=>$geometry, "properties"=>$row2];
-
-            array_push($features, $feature);
-            $featureCollection=["type"=>"FeatureCollection", "features"=>$features];
-          }   
-          if (isset($featureCollection)){
-            $layer->geom=$featureCollection;
-            unset($features);
-            unset($featureCollection);
-          }
+        $sql="SELECT ST_Value(rast, foo.pt_geom) AS rastval FROM \"{$yeardoy}\" CROSS JOIN (SELECT ST_SetSRID(ST_MakePoint({$lng},{$lat}), 4326) AS pt_geom) AS foo
+        where st_intersects(rast,foo.pt_geom)";
+        $result = DB::select($sql,[]); 
+        if (sizeof($result)>0 && $result[0]->rastval>-5000){
+          $currentarray['NDVI']=$result[0]->rastval;
         }
+      }
       
+      
+
+
+      $valuearray[]=$currentarray;
+      //$result = gregoriantojd( $date->format('m'), $date->format('d') , $date->format('Y') );
     }
-/////////////////////////////////
-    
-    return [
-      json_encode($result),
-      json_encode($newrows),
-      json_encode($layersArray[0]),
-      json_encode($layersArray[1]),
-      json_encode($layersArray[2]),
-      json_encode($mytext)
 
 
-    ];
+
+
+
+
+    $finalresult=json_encode($valuearray);
+    return $finalresult;
 });
 
 
