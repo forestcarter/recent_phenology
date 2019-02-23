@@ -44584,8 +44584,8 @@ var Graph = function (_PureComponent) {
       return _react2.default.createElement(
         _recharts.BarChart,
         {
-          width: 500,
-          height: 300,
+          width: 480,
+          height: 380,
           data: this.props.valuesResult,
           margin: {
             top: 5, right: 30, left: 20, bottom: 5

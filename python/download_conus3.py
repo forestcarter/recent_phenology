@@ -86,7 +86,7 @@ if downloadbool:
                     print ("target is ",target)
                     mydate.target = target
             url2 = "https://dds.cr.usgs.gov/highvolume/emodis_v6/CONUS6/expedited/AQUA/{0}/comp_{1}/{2}".format(mydate.year,mydate.julday,target)
-            dllist =['/usr/bin/wget', '--no-proxy', '--show-progress', '-t', '3', '-o', os.path.join(python_dir,'static','dldata.txt'), '-O', zipdestination+'.zip', '--no-check-certificate', '-L', '--user='+username, '--password='+password, url2]
+            dllist =['/usr/bin/wget', '--no-proxy', '-t', '3', '-o', os.path.join(python_dir,'static','dldata.txt'), '-O', zipdestination+'.zip', '--no-check-certificate', '-L', '--user='+username, '--password='+password, url2]
             print(dllist)
             subprocess.call(dllist)
             print("startingunzip")

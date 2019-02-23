@@ -42,7 +42,7 @@ Route::post('getvalues', function(Request $request) {
         $sql="SELECT ST_Value(rast, foo.pt_geom) AS rastval FROM \"{$yeardoy}\" CROSS JOIN (SELECT ST_SetSRID(ST_MakePoint({$lng},{$lat}), 4326) AS pt_geom) AS foo
         where st_intersects(rast,foo.pt_geom)";
         $result = DB::select($sql,[]); 
-        if (sizeof($result)>0 && $result[0]->rastval>-5000){
+        if (sizeof($result)>0 && $result[0]->rastval>-2000){
           $currentarray['NDVI']=$result[0]->rastval;
         }
       }
