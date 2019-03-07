@@ -39,7 +39,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
         'routes/**/*'
     ],
     reloadDelay: 200,
-    proxy: 'mylocalhost',
+    proxy: 'phen2',
     notify: false
     
 });

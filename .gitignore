@@ -18,6 +18,7 @@ yarn-error.log
 /public/shp
 dlhtml1.txt
 dldata1.txt
+*.tif
 
 
 

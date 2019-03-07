@@ -16512,7 +16512,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var style = {
-  height: "90vh"
+  height: "100%"
 };
 
 var Map = function (_React$Component) {
@@ -16554,8 +16554,9 @@ var Map = function (_React$Component) {
 
       tiles_directories.forEach(function (element, index) {
         if (element.length == 15) {
+          var elementLable = element.slice(4, 7) + "_" + element.slice(0, 4) + " - " + element.slice(12) + "_" + element.slice(8, 12);
           var lyr1 = _leaflet2.default.tileLayer("tiles4/" + element + "/{z}/{x}/{y}.png", { enable: true, tms: true, opacity: 0.6, attribution: "" });
-          _this2.overlaymaps[element] = lyr1;
+          _this2.overlaymaps[elementLable] = lyr1;
           _this2.allLayers.push(lyr1);
           if (_this2.allLayers.length == 1) {
             lyr1.addTo(_this2.map);
@@ -44319,7 +44320,8 @@ var Mapapp = function (_React$Component) {
     _this.handleMapClick = _this.handleMapClick.bind(_this);
     _this.handleOpacityChange = _this.handleOpacityChange.bind(_this);
     _this.state = {
-      loading: false,
+      loading: true,
+      loadingText: "Click map to show graph",
       valuesResult: [],
       clickLocation: { lat: 18.69349, lng: 360 - 98.16245 },
       mapSettings: {
@@ -44396,6 +44398,11 @@ var Mapapp = function (_React$Component) {
                 });
                 this.setState(function (prevState) {
                   return {
+                    loadingText: "Loading..."
+                  };
+                });
+                this.setState(function (prevState) {
+                  return {
                     loading: true
                   };
                 });
@@ -44414,7 +44421,7 @@ var Mapapp = function (_React$Component) {
                   console.log(valuesResult);
                 });
 
-              case 3:
+              case 4:
               case "end":
                 return _context2.stop();
             }
@@ -44448,10 +44455,10 @@ var Mapapp = function (_React$Component) {
 
       return _react2.default.createElement(
         "div",
-        null,
+        { className: "keepit100" },
         _react2.default.createElement(
           "div",
-          { id: "pagecontainer" },
+          { className: "keepit100", id: "pagecontainer" },
           _react2.default.createElement(
             "div",
             { id: "mapdiv" },
@@ -44464,15 +44471,23 @@ var Mapapp = function (_React$Component) {
             "div",
             { id: "graph" },
             this.state.loading ? _react2.default.createElement(
-              "p",
-              null,
-              "Loading......."
-            ) : _react2.default.createElement(_Graph2.default, { valuesResult: this.state.valuesResult
-            })
+              "div",
+              { id: "loading1" },
+              _react2.default.createElement(
+                "div",
+                { id: "loading2" },
+                this.state.loadingText
+              )
+            ) : _react2.default.createElement(_Graph2.default, { valuesResult: this.state.valuesResult })
           ),
           _react2.default.createElement(
             "div",
             { id: "textareadiv" },
+            _react2.default.createElement(
+              "p",
+              { className: "infotitles" },
+              "Data Source"
+            ),
             _react2.default.createElement(
               "p",
               { className: "textDisplay" },
@@ -44484,7 +44499,7 @@ var Mapapp = function (_React$Component) {
             { id: "legenddiv" },
             _react2.default.createElement(
               "p",
-              null,
+              { className: "infotitles" },
               "Legend"
             ),
             _react2.default.createElement(_Legend2.default, null)
@@ -44492,6 +44507,11 @@ var Mapapp = function (_React$Component) {
           _react2.default.createElement(
             "div",
             { id: "mapcontroldiv" },
+            _react2.default.createElement(
+              "p",
+              { className: "infotitles" },
+              "Opacity"
+            ),
             _react2.default.createElement(_MapControl2.default, { handleOpacityChange: this.handleOpacityChange })
           )
         ),
@@ -44549,7 +44569,7 @@ function Legend(props) {
 
   return _react2.default.createElement(
     "ul",
-    null,
+    { id: "legendul" },
     listItems
   );
 }
@@ -44600,12 +44620,9 @@ var Graph = function (_PureComponent) {
         {
           width: 480,
           height: 380,
-          data: this.props.valuesResult,
-          margin: {
-            top: 5, right: 30, left: 20, bottom: 5
-          }
+          data: this.props.valuesResult
+
         },
-        _react2.default.createElement(_recharts.CartesianGrid, { strokeDasharray: '3 3' }),
         _react2.default.createElement(_recharts.XAxis, { dataKey: 'date' }),
         _react2.default.createElement(_recharts.YAxis, null),
         _react2.default.createElement(_recharts.Tooltip, null),
@@ -83404,56 +83421,43 @@ var MapControl = function (_React$Component) {
     }
 
     _createClass(MapControl, [{
-        key: "handleOpacityChange",
+        key: 'handleOpacityChange',
         value: function handleOpacityChange(event) {
             this.props.handleOpacityChange(event.target.value);
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                "div",
+                'div',
                 null,
                 _react2.default.createElement(
-                    "div",
-                    { className: "form-group row  justify-content-start align-items-center p-1 mx-3" },
+                    'select',
+                    { name: 'table_option', id: 'table_optionOpacity', defaultValue: '0.6', onChange: this.handleOpacityChange, className: 'table_option form-control ' },
                     _react2.default.createElement(
-                        "div",
-                        { className: "p-3" },
-                        _react2.default.createElement(
-                            "label",
-                            { className: "style_option" },
-                            "Opacity"
-                        ),
-                        _react2.default.createElement(
-                            "select",
-                            { name: "table_option", id: "table_optionOpacity", defaultValue: "0.6", onChange: this.handleOpacityChange, className: "table_option form-control " },
-                            _react2.default.createElement(
-                                "option",
-                                { value: "1.0" },
-                                "1.0"
-                            ),
-                            _react2.default.createElement(
-                                "option",
-                                { value: "0.8" },
-                                "0.8"
-                            ),
-                            _react2.default.createElement(
-                                "option",
-                                { value: "0.6" },
-                                "0.6"
-                            ),
-                            _react2.default.createElement(
-                                "option",
-                                { value: "0.4" },
-                                "0.4"
-                            ),
-                            _react2.default.createElement(
-                                "option",
-                                { value: "0.2" },
-                                "0.2"
-                            )
-                        )
+                        'option',
+                        { value: '1.0' },
+                        '1'
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        { value: '0.8' },
+                        '.8'
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        { value: '0.6' },
+                        '.6'
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        { value: '0.4' },
+                        '.4'
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        { value: '0.2' },
+                        '.2'
                     )
                 )
             );

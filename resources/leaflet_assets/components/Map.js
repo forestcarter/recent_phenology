@@ -2,7 +2,7 @@ import React from "react";
 import L from "leaflet";
 
 const style = {
-  height: "90vh"
+  height: "100%"
 };
 
 class Map extends React.Component {
@@ -40,8 +40,9 @@ class Map extends React.Component {
 
     tiles_directories.forEach((element,index) => {
       if ((element.length)==15){
+		  let elementLable = element.slice(4,7)+"_"+element.slice(0, 4) +" - "+ element.slice(12)+"_"+element.slice(8,12)
         var lyr1 = L.tileLayer(`tiles4/${element}/{z}/{x}/{y}.png`, { enable:true, tms: true, opacity: 0.6, attribution: ""});
-        this.overlaymaps[element]= lyr1
+        this.overlaymaps[elementLable] = lyr1
         this.allLayers.push(lyr1)
         if (this.allLayers.length==1){
           lyr1.addTo(this.map);

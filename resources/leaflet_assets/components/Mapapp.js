@@ -10,7 +10,8 @@ class Mapapp extends React.Component {
     this.handleMapClick = this.handleMapClick.bind(this);
     this.handleOpacityChange = this.handleOpacityChange.bind(this);
     this.state = {
-      loading:false,
+      loading:true,
+      loadingText:"Click map to show graph",
       valuesResult:[],
       clickLocation: { lat: 18.69349, lng: 360 - 98.16245 },
       mapSettings: {
@@ -25,6 +26,9 @@ class Mapapp extends React.Component {
         lat: event.latlng.lat,
         lng: event.latlng.lng
       }
+    }));
+    this.setState(prevState => ({
+      loadingText: "Loading..."
     }));
     this.setState(prevState => ({
       loading: true
@@ -80,8 +84,8 @@ class Mapapp extends React.Component {
   render() {
     
     return (
-      <div>
-        <div id="pagecontainer">
+      <div className='keepit100'>
+        <div className='keepit100' id="pagecontainer">
             <div id="mapdiv">
               <Map 
               handleMapClick={this.handleMapClick}
@@ -90,25 +94,35 @@ class Mapapp extends React.Component {
             </div>
             
             <div id='graph'> 
-            {this.state.loading?<p>Loading.......</p> :<Graph valuesResult={this.state.valuesResult} 
-              />
-            }
+                {
+                  this.state.loading?
+                  <div id='loading1'>
+                    <div id='loading2'>
+                      {this.state.loadingText}
+                    </div>
+                  </div>
+                                  
+                :
+                <Graph valuesResult={this.state.valuesResult} />
+                }
             </div>
 
             <div id="textareadiv">
+              <p className='infotitles'>Data Source</p>
               <p className='textDisplay'>EMODIS data are obtained as 7 day composites. This viewer subtracts one composite from the subsequent week. These calculations result in positive values representing an increase in NDVI, negative values representing a decrease in NDVI, and zero representing no change. In the current symbology, red represents a decrease in NDVI, white represents small or no change, green represents an increase in NDVI, and blue represents a dramatic increase in NDVI. 
               </p>
             </div>
 
             <div id="legenddiv">
-              <p>Legend</p>
+              <p className='infotitles'>Legend</p>
               <Legend 
               />
               
             </div>
 
             <div id="mapcontroldiv">
-                <MapControl handleOpacityChange={this.handleOpacityChange} />
+              <p className='infotitles'>Opacity</p>
+              <MapControl handleOpacityChange={this.handleOpacityChange} />
             </div>
         </div>
 

@@ -10474,18 +10474,45 @@ body {
   line-height: 1;
 }
 
+#loading1 {
+  display: table;
+  height: 100%;
+  overflow: hidden;
+  margin: auto;
+}
+
+#loading2 {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.keepit100 {
+  height: 100%;
+}
+
+#legendul {
+  padding: 0px;
+  margin: auto;
+  width: 105px;
+}
+
+.infotitles {
+  text-align: center;
+  margin-top: 28px;
+}
+
 .textDisplay {
   font-size: 13px;
   margin: 10px;
 }
 
 #mapdiv {
-  margin: 10px;
-  border: black solid 1px;
+  border-right: black solid 1px;
   grid-area: map;
 }
 
 #mapcontoldiv {
+  margin-right: 5px;
   grid-area: control;
 }
 
@@ -10504,10 +10531,11 @@ body {
 }
 
 #pagecontainer {
+  margin-right: 8px;
   display: grid;
   grid-template-columns: auto 140px 260px 100px;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-areas: "map graph graph graph" "map graph graph graph" "map legend textarea control";
+  grid-template-rows: 3fr 2fr;
+  grid-template-areas: "map graph graph graph" "map legend textarea control";
 }
 
 .legendColorBox {
@@ -10523,7 +10551,6 @@ body {
   display: inline-block;
   margin-top: 0px;
   margin-bottom: 0px;
-  font-size: 9px;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 13px;
 }
 

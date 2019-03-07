@@ -129,7 +129,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var style = {
-  height: "90vh"
+  height: "100%"
 };
 
 var Map = function (_React$Component) {
@@ -171,8 +171,9 @@ var Map = function (_React$Component) {
 
       tiles_directories.forEach(function (element, index) {
         if (element.length == 15) {
+          var elementLable = element.slice(4, 7) + "_" + element.slice(0, 4) + " - " + element.slice(12) + "_" + element.slice(8, 12);
           var lyr1 = _leaflet2.default.tileLayer("tiles4/" + element + "/{z}/{x}/{y}.png", { enable: true, tms: true, opacity: 0.6, attribution: "" });
-          _this2.overlaymaps[element] = lyr1;
+          _this2.overlaymaps[elementLable] = lyr1;
           _this2.allLayers.push(lyr1);
           if (_this2.allLayers.length == 1) {
             lyr1.addTo(_this2.map);

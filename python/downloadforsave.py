@@ -14,9 +14,9 @@ class Dldate:
 		self.yearjul = str(year)+julday
 		self.target = 'none'
 
-minusarray = [2,9]
+minusarray = [2]
 python_dir = os.path.dirname(os.path.realpath(__file__))
-staticpath = os.path.join(python_dir,'static')
+staticpath = os.path.join(python_dir,'staticforsave')
 tilespath = "/var/www/html/recent_phenology/public/tiles4"
 previoussuccess=-7
 
@@ -64,7 +64,7 @@ if downloadbool:
 		success=False
 
 		while (success==False and dlfailed==False):
-			if (index==0 and int(mydate.yearjul[-7:]) < int(mostrecentdate[-7:])):
+			if trial>2 or (index==0 and int(mydate.yearjul[-7:]) < int(mostrecentdate[-7:])):
 				dlfailed=True
 				break
 			print (str(datetime.now()))
@@ -105,19 +105,7 @@ if downloadbool:
 			else:
 				print(trial)
 				trial=trial+1
-				if trial>2:
-					trial=0
-					newsubtract= mydate.subtract+1
-					if ((newsubtract-previoussuccess)<7):
-						newsubtract=previoussuccess+7
-					newmydate = datetime.today() - timedelta(days = newsubtract)
-					newjulday = str( (newmydate.toordinal() - 125) % 365 +1)
-					if len(newjulday)==1:
-						newjulday="0"+newjulday
-					if len(newjulday)==2:
-						newjulday="0"+newjulday
-					print("real"+newjulday)
-					mydate= Dldate(newsubtract,newjulday, newmydate.year)
+				
 					
 ### PROCESS
 targetdatearray=datearray
@@ -149,26 +137,5 @@ if len(targetdatearray)==len(minusarray):
 				suboutput = subprocess.check_output(savetodb,shell=True)
 			except:
 				pass
-			
-		else:
-			outfolder=os.path.join(tilespath,str(firstdate)+"-"+str(mydate.yearjul))
-
-			colorsfile = os.path.join(python_dir,"colors.txt")
-			postqual = os.path.join(staticpath, mydate.yearjul+"postqual")
-	
-			withcolor = os.path.join(staticpath, mydate.yearjul+"withcolor")
-			
-			subprocess.call(["python", os.path.join(python_dir,'gdal_calc.py'), "--type=Int32", "-A", firstndviwarp, "-B", ndviwarp, "-C", firstqualwarp,"-D", qualwarp,"--outfile={0}".format(postqual), "--calc","-13000+13000*(C<1)*(D<1)+A*(C<1)*(D<1)-B*(C<1)*(D<1)", "--overwrite"])
-			subprocess.call(["python", os.path.join(python_dir,'gdal_calc.py'), "--type=Int32", "-A", firstndviwarp, "-B", postqual,"--outfile=gdal_calc.tif", "--calc","-13005+13005*(A>-2000)+B*(A>-2000)", "--overwrite"])
-			os.system("rm {}".format(postqual))
-
-			subprocess.call(['gdaldem', "color-relief", "-of", "VRT","gdal_calc.tif", colorsfile, withcolor])
-
-			if os.path.isdir(tilespath) and ind==1:
-				os.system("rm -rf {}".format(tilespath))
-				print ('deleted tilespath')
-				os.system("mkdir {}".format(tilespath))
-			subprocess.call(["python", os.path.join(python_dir,'gdal2tiles.py'), "-z", "1-12", withcolor, outfolder])
-			os.system("rm {}".format(withcolor))
 
 print (str(datetime.now()))

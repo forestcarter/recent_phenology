@@ -22,7 +22,7 @@ function Legend(props) {
   ));
 
   return (
-    <ul>
+    <ul id='legendul'>
       {listItems}
     </ul>
   );
