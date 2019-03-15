@@ -153,11 +153,11 @@ var Map = function (_React$Component) {
         layers: []
       });
 
-      var streets = _leaflet2.default.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+      var streets = _leaflet2.default.tileLayer("https://a.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(this.map);
 
-      var imagery = _leaflet2.default.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      var imagery = _leaflet2.default.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         attribution: '&copy; <a href="http://www.esri.com/">Esri</a>i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
         maxZoom: 18
       });
@@ -171,9 +171,13 @@ var Map = function (_React$Component) {
 
       tiles_directories.forEach(function (element, index) {
         if (element.length == 15) {
-          var elementLable = element.slice(4, 7) + "_" + element.slice(0, 4) + " - " + element.slice(12) + "_" + element.slice(8, 12);
+          var firstDate = new Date(element.slice(0, 4), 0, element.slice(4, 7));
+          var secondDate = new Date(element.slice(8, 12), 0, element.slice(12));
+          var elementLabel = firstDate.getMonth() + 1 + "/" + firstDate.getDate() + " - " + (secondDate.getMonth() + 1) + "/" + secondDate.getDate();
+          // let realDate = element.slice(4,7)+"-"+ element.slice(8,12)
+          // let elementLable = element.slice(4,7)+"_"+element.slice(0, 4) +" - "+ element.slice(12)+"_"+element.slice(8,12)
           var lyr1 = _leaflet2.default.tileLayer("tiles4/" + element + "/{z}/{x}/{y}.png", { enable: true, tms: true, opacity: 0.6, attribution: "" });
-          _this2.overlaymaps[elementLable] = lyr1;
+          _this2.overlaymaps[elementLabel] = lyr1;
           _this2.allLayers.push(lyr1);
           if (_this2.allLayers.length == 1) {
             lyr1.addTo(_this2.map);

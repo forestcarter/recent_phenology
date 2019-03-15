@@ -20,13 +20,13 @@ class Map extends React.Component {
       layers: []
     });
 
-    const streets = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+    const streets = L.tileLayer("https://a.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
   
     const imagery = L.tileLayer(
-    'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     attribution: '&copy; <a href="http://www.esri.com/">Esri</a>i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
     maxZoom: 18,
     });
@@ -40,9 +40,13 @@ class Map extends React.Component {
 
     tiles_directories.forEach((element,index) => {
       if ((element.length)==15){
-		  let elementLable = element.slice(4,7)+"_"+element.slice(0, 4) +" - "+ element.slice(12)+"_"+element.slice(8,12)
+		const firstDate = new Date(element.slice(0, 4), 0, element.slice(4,7))
+		const secondDate = new Date(element.slice(8, 12), 0, element.slice(12))
+		const elementLabel = (firstDate.getMonth()+1)+"/"+firstDate.getDate()+" - "+(secondDate.getMonth()+1)+"/"+secondDate.getDate()
+		// let realDate = element.slice(4,7)+"-"+ element.slice(8,12)
+		// let elementLable = element.slice(4,7)+"_"+element.slice(0, 4) +" - "+ element.slice(12)+"_"+element.slice(8,12)
         var lyr1 = L.tileLayer(`tiles4/${element}/{z}/{x}/{y}.png`, { enable:true, tms: true, opacity: 0.6, attribution: ""});
-        this.overlaymaps[elementLable] = lyr1
+        this.overlaymaps[elementLabel] = lyr1
         this.allLayers.push(lyr1)
         if (this.allLayers.length==1){
           lyr1.addTo(this.map);

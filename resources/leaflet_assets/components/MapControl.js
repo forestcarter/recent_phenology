@@ -15,7 +15,7 @@ class MapControl extends React.Component {
     
     render(){
         return(
-        <div>               
+        <div className='textCenter'>               
           <select name='table_option' id='table_optionOpacity' defaultValue="0.6" onChange={this.handleOpacityChange} className='table_option form-control '>
               <option value="1.0">1</option>
               <option value="0.8">.8</option>
