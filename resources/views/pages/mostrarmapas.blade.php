@@ -3,11 +3,11 @@ if (!session('email')){
     return redirect()->to('/login')->send();
 }
 
-$tilefolders=scandir(getcwd().DIRECTORY_SEPARATOR.'tiles4');
-$ttt=json_encode(array_diff($tilefolders,array('..', '.')));
+$tilefoldersraw=scandir(getcwd().DIRECTORY_SEPARATOR.'tiles4');
+$tilefolders=json_encode(array_diff($tilefoldersraw,array('..', '.')));
 ?>
 <script>
-  var tileFolders = {!! $ttt !!};
+  var tileFolders = {!! $tilefolders !!};
 </script>
 
 @include('inc/loadlayers')

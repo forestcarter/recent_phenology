@@ -37,7 +37,7 @@ class Map extends React.Component {
     };
     this.overlaymaps={}
     this.allLayers=[]
-
+	tiles_directories.sort().reverse();
     tiles_directories.forEach((element,index) => {
       if ((element.length)==15){
 		const firstDate = new Date(element.slice(0, 4), 0, element.slice(4,7))
