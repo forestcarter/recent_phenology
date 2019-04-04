@@ -16521,10 +16521,27 @@ var Map = function (_React$Component) {
   function Map(props) {
     _classCallCheck(this, Map);
 
-    return _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, props));
+
+    _this.onMapClick = _this.onMapClick.bind(_this);
+
+    _this.state = {
+      currentMarker: null
+    };
+    return _this;
   }
 
   _createClass(Map, [{
+    key: "onMapClick",
+    value: function onMapClick(e) {
+      this.props.handleMapClick(e);
+      if (this.state.currentMarker) {
+        this.state.currentMarker.remove();
+      }
+      var currentMarker = _leaflet2.default.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map);
+      this.setState({ currentMarker: currentMarker });
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
@@ -16535,6 +16552,7 @@ var Map = function (_React$Component) {
         zoom: 6,
         layers: []
       });
+      this.map.on('click', this.onMapClick);
 
       var streets = _leaflet2.default.tileLayer("https://a.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -16551,14 +16569,13 @@ var Map = function (_React$Component) {
       };
       this.overlaymaps = {};
       this.allLayers = [];
-
+      tiles_directories.sort().reverse();
       tiles_directories.forEach(function (element, index) {
         if (element.length == 15) {
           var firstDate = new Date(element.slice(0, 4), 0, element.slice(4, 7));
           var secondDate = new Date(element.slice(8, 12), 0, element.slice(12));
           var elementLabel = firstDate.getMonth() + 1 + "/" + firstDate.getDate() + " - " + (secondDate.getMonth() + 1) + "/" + secondDate.getDate();
-          // let realDate = element.slice(4,7)+"-"+ element.slice(8,12)
-          // let elementLable = element.slice(4,7)+"_"+element.slice(0, 4) +" - "+ element.slice(12)+"_"+element.slice(8,12)
+
           var lyr1 = _leaflet2.default.tileLayer("tiles4/" + element + "/{z}/{x}/{y}.png", { enable: true, tms: true, opacity: 0.6, attribution: "" });
           _this2.overlaymaps[elementLabel] = lyr1;
           _this2.allLayers.push(lyr1);
@@ -16568,14 +16585,8 @@ var Map = function (_React$Component) {
         }
       });
 
-      // this.map.addLayer(lyr1);
-      // this.overlaymaps = {"RMD_NDVI": lyr1}
-      // L.control.layers(this.baseMaps,this.overlaymaps).addTo(this.map);
       _leaflet2.default.control.layers(this.baseMaps, this.overlaymaps).addTo(this.map);
-
-      this.map.on("click", this.props.handleMapClick);
       this.map.scrollWheelZoom.disable();
-      ///////////LEGENDNEW////////////
     }
   }, {
     key: "componentDidUpdate",
@@ -44392,37 +44403,21 @@ var Mapapp = function (_React$Component) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                this.setState(function (prevState) {
-                  return {
-                    clickLocation: {
-                      lat: event.latlng.lat,
-                      lng: event.latlng.lng
-                    }
-                  };
-                });
-                this.setState(function (prevState) {
-                  return {
-                    loadingText: "Loading..."
-                  };
-                });
-                this.setState(function (prevState) {
-                  return {
-                    loading: true
-                  };
+                this.setState({
+                  clickLocation: {
+                    lat: event.latlng.lat,
+                    lng: event.latlng.lng
+                  }
                 });
 
+                this.setState({ loadingText: "Loading..." });
+                this.setState({ loading: true });
+
                 getValues(event.latlng.lat, event.latlng.lng).then(function (valuesResult) {
-                  _this2.setState(function (prevState) {
-                    return {
-                      valuesResult: valuesResult
-                    };
-                  });
-                  _this2.setState(function (prevState) {
-                    return {
-                      loading: false
-                    };
-                  });
-                  console.log(valuesResult);
+
+                  _this2.setState({ valuesResult: valuesResult });
+
+                  _this2.setState({ loading: false });
                 });
 
               case 4:
@@ -44442,17 +44437,12 @@ var Mapapp = function (_React$Component) {
   }, {
     key: "handleOpacityChange",
     value: function handleOpacityChange(value) {
-      this.setState(function (prevState) {
-        return {
-          mapSettings: {
-            fillOpacity: value
-          }
-        };
+      this.setState({
+        mapSettings: {
+          fillOpacity: value
+        }
       });
     }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {}
   }, {
     key: "render",
     value: function render() {
@@ -84166,7 +84156,7 @@ module.exports = "/images/layers-2x.png?4f0283c6ce28e888000e978e537a6a56";
 /* 673 */
 /***/ (function(module, exports) {
 
-module.exports = "/images/marker-icon.png?709c4a47f55746b38e8f6f8221c195b9";
+module.exports = "/images/marker-icon.png?2273e3d8ad9264b7daa5bdbf8e6b47f8";
 
 /***/ }),
 /* 674 */
@@ -84178,7 +84168,7 @@ module.exports = "/images/marker-shadow.png?5d26d92110d6f81033ede07f5aa2f369";
 /* 675 */
 /***/ (function(module, exports) {
 
-module.exports = "/images/marker-icon-2x.png?709c4a47f55746b38e8f6f8221c195b9";
+module.exports = "/images/marker-icon-2x.png?401d815dc206b8dc1b17cd0e37695975";
 
 /***/ })
 /******/ ]);

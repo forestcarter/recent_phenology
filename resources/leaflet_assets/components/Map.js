@@ -7,18 +7,31 @@ const style = {
 
 class Map extends React.Component {
     constructor(props) {
-        super(props);
-    }
-    
-   
-    
+		super(props);
+		this.onMapClick = this.onMapClick.bind(this);
+
+		this.state = {
+			currentMarker:null
+		}
+	}
+	
+     onMapClick(e){
+		this.props.handleMapClick(e)
+		if (this.state.currentMarker){
+			this.state.currentMarker.remove()
+		}
+		let currentMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map);
+		this.setState({currentMarker: currentMarker});
+	}
+
   componentDidMount() {
     // create map
     this.map = L.map("map", {
       center: [32.1874446, -110.9185017],
       zoom: 6,
       layers: []
-    });
+	});
+	this.map.on('click', this.onMapClick);
 
     const streets = L.tileLayer("https://a.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
@@ -43,8 +56,7 @@ class Map extends React.Component {
 		const firstDate = new Date(element.slice(0, 4), 0, element.slice(4,7))
 		const secondDate = new Date(element.slice(8, 12), 0, element.slice(12))
 		const elementLabel = (firstDate.getMonth()+1)+"/"+firstDate.getDate()+" - "+(secondDate.getMonth()+1)+"/"+secondDate.getDate()
-		// let realDate = element.slice(4,7)+"-"+ element.slice(8,12)
-		// let elementLable = element.slice(4,7)+"_"+element.slice(0, 4) +" - "+ element.slice(12)+"_"+element.slice(8,12)
+	
         var lyr1 = L.tileLayer(`tiles4/${element}/{z}/{x}/{y}.png`, { enable:true, tms: true, opacity: 0.6, attribution: ""});
         this.overlaymaps[elementLabel] = lyr1
         this.allLayers.push(lyr1)
@@ -54,15 +66,8 @@ class Map extends React.Component {
       }
     });
     
-    // this.map.addLayer(lyr1);
-    // this.overlaymaps = {"RMD_NDVI": lyr1}
-    // L.control.layers(this.baseMaps,this.overlaymaps).addTo(this.map);
     L.control.layers(this.baseMaps,this.overlaymaps).addTo(this.map);
-
-    this.map.on("click", this.props.handleMapClick);
     this.map.scrollWheelZoom.disable()
-    ///////////LEGENDNEW////////////
-
   }
 
   componentDidUpdate({ mapSettings }) {

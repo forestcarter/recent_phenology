@@ -21,18 +21,17 @@ class Mapapp extends React.Component {
   }
 
   async handleMapClick(event) {
-    this.setState(prevState => ({
+    this.setState({
       clickLocation: {
         lat: event.latlng.lat,
         lng: event.latlng.lng
       }
-    }));
-    this.setState(prevState => ({
-      loadingText: "Loading..."
-    }));
-    this.setState(prevState => ({
-      loading: true
-    }));
+    });
+    
+	this.setState({loadingText: "Loading..."});
+	this.setState({loading: true});
+
+  
 
     async function getValues(lat,lng) {
       let myapi = "https://recentphenology.com/api/getvalues";
@@ -56,30 +55,23 @@ class Mapapp extends React.Component {
     }
    
       getValues(event.latlng.lat,event.latlng.lng).then(valuesResult => {
-        this.setState(prevState => ({
-          valuesResult: valuesResult
-        }));
-        this.setState(prevState => ({
-          loading: false
-        }));
-        console.log(valuesResult)
+        
+		this.setState({valuesResult: valuesResult});
+
+		this.setState({loading: false});
+
+        
       });
 
     }
 
   handleOpacityChange(value) {
-    this.setState(prevState => ({
+    this.setState({
       mapSettings: {
         fillOpacity: value
       }
-    }));
+    });
   }
-
-  componentDidMount() {
-
-    
-  }
-
 
   render() {
     

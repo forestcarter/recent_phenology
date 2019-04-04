@@ -138,10 +138,27 @@ var Map = function (_React$Component) {
   function Map(props) {
     _classCallCheck(this, Map);
 
-    return _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, props));
+
+    _this.onMapClick = _this.onMapClick.bind(_this);
+
+    _this.state = {
+      currentMarker: null
+    };
+    return _this;
   }
 
   _createClass(Map, [{
+    key: "onMapClick",
+    value: function onMapClick(e) {
+      this.props.handleMapClick(e);
+      if (this.state.currentMarker) {
+        this.state.currentMarker.remove();
+      }
+      var currentMarker = _leaflet2.default.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map);
+      this.setState({ currentMarker: currentMarker });
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
@@ -152,6 +169,7 @@ var Map = function (_React$Component) {
         zoom: 6,
         layers: []
       });
+      this.map.on('click', this.onMapClick);
 
       var streets = _leaflet2.default.tileLayer("https://a.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -168,14 +186,13 @@ var Map = function (_React$Component) {
       };
       this.overlaymaps = {};
       this.allLayers = [];
-
+      tiles_directories.sort().reverse();
       tiles_directories.forEach(function (element, index) {
         if (element.length == 15) {
           var firstDate = new Date(element.slice(0, 4), 0, element.slice(4, 7));
           var secondDate = new Date(element.slice(8, 12), 0, element.slice(12));
           var elementLabel = firstDate.getMonth() + 1 + "/" + firstDate.getDate() + " - " + (secondDate.getMonth() + 1) + "/" + secondDate.getDate();
-          // let realDate = element.slice(4,7)+"-"+ element.slice(8,12)
-          // let elementLable = element.slice(4,7)+"_"+element.slice(0, 4) +" - "+ element.slice(12)+"_"+element.slice(8,12)
+
           var lyr1 = _leaflet2.default.tileLayer("tiles4/" + element + "/{z}/{x}/{y}.png", { enable: true, tms: true, opacity: 0.6, attribution: "" });
           _this2.overlaymaps[elementLabel] = lyr1;
           _this2.allLayers.push(lyr1);
@@ -185,14 +202,8 @@ var Map = function (_React$Component) {
         }
       });
 
-      // this.map.addLayer(lyr1);
-      // this.overlaymaps = {"RMD_NDVI": lyr1}
-      // L.control.layers(this.baseMaps,this.overlaymaps).addTo(this.map);
       _leaflet2.default.control.layers(this.baseMaps, this.overlaymaps).addTo(this.map);
-
-      this.map.on("click", this.props.handleMapClick);
       this.map.scrollWheelZoom.disable();
-      ///////////LEGENDNEW////////////
     }
   }, {
     key: "componentDidUpdate",
