@@ -1,34 +1,28 @@
-# Biodiversity in Puebla
+# Recent Phenology
 
-This project aims to provide a web platform to capture, analyze, and display biodiversity data in the state of Puebla, Mexico. This web platform provides an intuitive user interface for partners throughout the state to enter data collected via the MTP biodiversity monitoring technique. The site is live at
-* [https//:biodiversidadpuebla.online](https//:biodiversidadpuebla.online)
+This project began as a way to inform herbicide application decisions at Saguaro National Park. Land managers use herbicide to kill invasive buffelgrass, which must be targeted right after the first green-up in the spring. EMODIS data provides recent NDVI data that be used to see where green-up has occurred, and to what degree. This web app shows NDVI difference data that highlights areas that have experienced dramatic NDVI change in the last few weeks.
+The site is live at
+* [https//:recentphenology.com](https//:recentphenology.com)
 
 ### User Interface
 
-The user interface was custom built to be intuitieve and user friendly. Existing data is autmoatically retieved to be editable. Extensive data verification is done automatically.
-This section is under the 'Ingresar Datos' heading.
+The user interface provides several NDVI difference layers and two basemaps, as well as time-series of NDVI values displayed as in a bar graph. 
 
 
 ### Mapping
-Spatial data mapping was done using Leaflet. This page also uses React to provide a responsive user experience. Javascript Fetch API is used to generate dynamic SQL queries. This section is under the 'Mostrar Mapas' heading.
+EMODIS data is subtracted from subsequent weeks and shown as raster layers with resolutions of 250km.
 
 ### Database
 
-All data is stored in a relationa database using postgreSQL. Spatial data is handled using the POSTGIS extension.  
+All data is stored in a relational database using PostgreSQL. Spatial data is handled using the POSTGIS extension. 
 
 ### Development and Framework
 
 Laravel was used to scaffold the views using Blade and PHP. 
 
-
 ### Server
 
-The website runs on a Debian 9 (Stretch) droplet from Digial Ocean. Encryption is done using LetsEncrypt and Certbot. Apache serves the site to the web. 
-
-
-
-
- 
+The website runs on a Debian 9 (Stretch) droplet from Google Cloud Platform Encryption is done using LetsEncrypt and Certbot. Apache serves the site to the web. 
 
 ## Authors
 
